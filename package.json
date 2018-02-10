@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.17.1",
     "js-recommender": "^1.0.5",
     "likely": "^0.2.0"
   }
