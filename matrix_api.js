@@ -1,7 +1,7 @@
-apiKey = "AIzaSyC5RyPE6GFpqijcgU6Iv10EjjJX8lBOSO8"
+var matrixKey = config.matrix_KEY
 let request = require('request')
 let options = {
-  "url": "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592&key=AIzaSyBtVpXAuWlnuC7hicRdzFBzBifYR1evqIY",
+  "url": "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592&key=" + matrixKey,
   "method": "GET",
   "qs": {
     

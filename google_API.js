@@ -8,10 +8,11 @@ httpsGet(address, (myResult) => {
 });
 function httpsGet(myData, callback) {
     // Update these options with the details of the web service you would like to call
+    var google_key =config.googleAPI_KEY
     var options = {
         host: 'maps.googleapis.com',
         port: 443,
-        path: `/maps/api/geocode/json?address=${encodeURIComponent(myData)}&key=AIzaSyD-8QBhZNxZLnmX2AxBEOB2sSHzg4L2tZs`,
+        path: `/maps/api/geocode/json?address=${encodeURIComponent(myData)}&key=` + google_key,
         method: 'GET',
         // if x509 certs are required:
         // key: fs.readFileSync('certs/my-key.pem'),
@@ -43,14 +44,14 @@ function httpsGet(myData, callback) {
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //Json format for google geocode
-apiKey = "AIzaSyC5RyPE6GFpqijcgU6Iv10EjjJX8lBOSO8"
+var geoKey = config.geocode_KEY
 let request = require('request')
 let options = {
-  "url": "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyCtl6MSQyU4kCsb5VfTLk-UK_B72oVYlwM",
+  "url": "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=" + geoKey,
   "method": "GET",
   "qs": {
     "address": "boston museum",
-    "apikey": apiKey
+    "apikey": geoKey
   }
 }
 //This function to go through the json and get it out.

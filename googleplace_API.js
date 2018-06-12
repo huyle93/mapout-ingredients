@@ -12,12 +12,13 @@ httpsGetmyGoogleplace(location, location_2, rank, type, rate, (myResult) => {
     //console.log("received : " + myResult);
 });
 function httpsGetmyGoogleplace(lat, lng, rankby, types, rating, callback) {
+    var googlePlacekey = config.googleplace_KEY
     // Update these options with the details of the web service you would like to call
     var options = {
         host: 'maps.googleapis.com',
         port: 443,
         //path: `/maps/api/geocode/json?address=${encodeURIComponent(myData)}&key=AIzaSyD-8QBhZNxZLnmX2AxBEOB2sSHzg4L2tZs`,
-        path: `/maps/api/place/nearbysearch/json?location=${lat},${lng}&rankby=${rankby}&types=${types}&rating=${rating}&key=AIzaSyBtVpXAuWlnuC7hicRdzFBzBifYR1evqIY`,
+        path: `/maps/api/place/nearbysearch/json?location=${lat},${lng}&rankby=${rankby}&types=${types}&rating=${rating}&key=` + googlePlacekey,
         method: 'GET',
 
         // if x509 certs are required:
@@ -55,20 +56,3 @@ function httpsGetmyGoogleplace(lat, lng, rankby, types, rating, callback) {
     req.end();
 }
 //////////////////////////////////////////////////////////////////////////
-//Calling google API place
-apiKey = "AIzaSyC5RyPE6GFpqijcgU6Iv10EjjJX8lBOSO8"
-let request = require('request')
-let options = {
-  "url": "https://maps.googleapis.com/maps/api/place/textsearch/json?query=892 Central Ave, Dover, NH 03820&key=AIzaSyBtVpXAuWlnuC7hicRdzFBzBifYR1evqIY",
-  "method": "GET",
-  "qs": {
-
-  }
-}
-//This function to go through the json and get it out.
-request(options,(err,resp,body)=>{
-//go through the address components and geometry components.
-var data = JSON.parse(body);  //}
-console.log(data.results[0].types[0])
-  }
-)

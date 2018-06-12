@@ -1,4 +1,4 @@
-apiKey = "AIzaSyC5RyPE6GFpqijcgU6Iv10EjjJX8lBOSO8"
+var mygasfeedkey = config.mygasfeed_KEY
 //This function to go through the json and get it out.
 function get_price( lat , lng ){
   let request = require('request')
@@ -7,7 +7,7 @@ function get_price( lat , lng ){
     "method": "GET",
     "qs": {
       "address": "2+old+english+village+apt+110",
-      "apikey": apiKey
+      "apikey": mygasfeedkey
     }
   }
 request(options,(err,resp,body)=>{
