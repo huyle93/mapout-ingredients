@@ -1,10 +1,10 @@
 var axios = require('axios');
+var axioskey = config.axious_KEY
 location = '1600+Amphitheatre+Parkway,+Mountain+View,+CA'
-apikey = 'AIzaSyAwPXNK1JHdWNe4T2y1k34RaUsNkPYfDE8'
 axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
     params:{
         address: location,
-        key: apikey
+        key: axioskey
     }
 })
 .then(function(response){
