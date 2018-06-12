@@ -1,14 +1,14 @@
 //Shine API car Theft
-apikey = "UKxbxhZYNEiP4spThYCy61bwEhRQXlPb"
+var shine_key = config.shineapi_KEY
 let request = require('request')
 
 let options = {
-  "url": "https://apis.solarialabs.com/shine/v1/vehicle-thefts?state=nh&rank=3&apikey=UKxbxhZYNEiP4spThYCy61bwEhRQXlPb",
+  "url": "https://apis.solarialabs.com/shine/v1/vehicle-thefts?state=nh&rank=3&apikey=" + shine_key,
   "method": "GET",
   "qs": {
     "state": "nh",
     "rank": "3",
-    "apikey": apikey
+    "apikey": shine_key
   }
 }
 request(options,(err,resp,body)=>{
@@ -19,17 +19,16 @@ var data = JSON.parse(body)
 })
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Shine API car stat
-const apikey = "UKxbxhZYNEiP4spThYCy61bwEhRQXlPb"
 let request = require('request')
 let options = {
-  "url": "https://apis.solarialabs.com/shine/v1/vehicle-stats/specs?make=toyota&model=camry&year=2010&full-data=true&apikey=UKxbxhZYNEiP4spThYCy61bwEhRQXlPb",
+  "url": "https://apis.solarialabs.com/shine/v1/vehicle-stats/specs?make=toyota&model=camry&year=2010&full-data=true&apikey=" + shine_key,
   "method": "GET",
   "qs": {
     "make": "toyota",
     "model": "camry",
     "year": "2010",
     "full-data": "true",
-    "apikey": apikey
+    "apikey": shine_key
   }
 }
 request(options,(err,resp,body)=>{
@@ -44,14 +43,13 @@ for(var i = 0; i < 4; i++){
 })
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Shine API prediction call
-apikey = "UKxbxhZYNEiP4spThYCy61bwEhRQXlPb"
 let request = require('request')
 let options = {
-  "url": "https://apis.solarialabs.com/shine/v1/vehicle-stats/five-year-costs?top-ten=worst&apikey=UKxbxhZYNEiP4spThYCy61bwEhRQXlPb",
+  "url": "https://apis.solarialabs.com/shine/v1/vehicle-stats/five-year-costs?top-ten=worst&apikey=" + shine_key,
   "method": "GET",
   "qs": {
     "top-ten": "worst",
-    "apikey": apikey
+    "apikey": shine_key
   }
 }
 request(options,(err,resp,body)=>{
