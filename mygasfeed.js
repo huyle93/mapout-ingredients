@@ -1,4 +1,5 @@
-var mygasfeedkey = config.mygasfeed_KEY
+require('dotenv').load()
+var mygasfeedkey = process.env.mygasfeed_KEY
 //This function to go through the json and get it out.
 function get_price( lat , lng ){
   let request = require('request')

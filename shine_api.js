@@ -1,7 +1,7 @@
+require('dotenv').load()
 //Shine API car Theft
-var shine_key = config.shineapi_KEY
 let request = require('request')
-
+var shine_key = process.env.shineapi_KEY
 let options = {
   "url": "https://apis.solarialabs.com/shine/v1/vehicle-thefts?state=nh&rank=3&apikey=" + shine_key,
   "method": "GET",
@@ -14,13 +14,11 @@ let options = {
 request(options,(err,resp,body)=>{
 var data = JSON.parse(body)
 //Uncomment this line to test
-// console.log(data[i].Code, data[i].Rank, data[i].State, data[i].Make, data[i].Model, data[i].Year, data[i].Thefts);
 //console.log(data[0].Code, data[0].Rank, data[0].State, data[0].Make, data[0].Model, data[0].Year, data[0].Thefts)
 })
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Shine API car stat
-let request = require('request')
-let options = {
+let stat = {
   "url": "https://apis.solarialabs.com/shine/v1/vehicle-stats/specs?make=toyota&model=camry&year=2010&full-data=true&apikey=" + shine_key,
   "method": "GET",
   "qs": {
@@ -31,7 +29,7 @@ let options = {
     "apikey": shine_key
   }
 }
-request(options,(err,resp,body)=>{
+request(stat,(err,resp,body)=>{
 var data = JSON.parse(body)
 //console.log(data)
 for(var i = 0; i < 4; i++){
@@ -43,8 +41,7 @@ for(var i = 0; i < 4; i++){
 })
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Shine API prediction call
-let request = require('request')
-let options = {
+let prediction = {
   "url": "https://apis.solarialabs.com/shine/v1/vehicle-stats/five-year-costs?top-ten=worst&apikey=" + shine_key,
   "method": "GET",
   "qs": {
@@ -52,7 +49,7 @@ let options = {
     "apikey": shine_key
   }
 }
-request(options,(err,resp,body)=>{
+request(prediction,(err,resp,body)=>{
 var data = JSON.parse(body)
 for(var i = 0; i < 10; i++){
   //Uncomment this line to test

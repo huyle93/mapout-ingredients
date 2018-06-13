@@ -1,3 +1,5 @@
+require('dotenv').load()
+//const key = require('./config.js')
 var https = require('https');
 var address = 'Boston Museum';
 //This is for geocode google API call
@@ -8,7 +10,7 @@ httpsGet(address, (myResult) => {
 });
 function httpsGet(myData, callback) {
     // Update these options with the details of the web service you would like to call
-    var google_key =config.googleAPI_KEY
+    var google_key = process.env.googleAPI_KEY
     var options = {
         host: 'maps.googleapis.com',
         port: 443,
@@ -44,7 +46,7 @@ function httpsGet(myData, callback) {
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //Json format for google geocode
-var geoKey = config.geocode_KEY
+var geoKey = process.env.geocode_KEY
 let request = require('request')
 let options = {
   "url": "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=" + geoKey,
