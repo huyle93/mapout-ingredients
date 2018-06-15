@@ -18,7 +18,6 @@ function httpsGetmyGoogleplace(lat, lng, rankby, types, rating, callback) {
     var options = {
         host: 'maps.googleapis.com',
         port: 443,
-        //path: `/maps/api/geocode/json?address=${encodeURIComponent(myData)}&key=AIzaSyD-8QBhZNxZLnmX2AxBEOB2sSHzg4L2tZs`,
         path: `/maps/api/place/nearbysearch/json?location=${lat},${lng}&rankby=${rankby}&types=${types}&rating=${rating}&key=` + googlePlacekey,
         method: 'GET',
 
@@ -46,7 +45,7 @@ function httpsGetmyGoogleplace(lat, lng, rankby, types, rating, callback) {
             var rate = pop.results[0].rating;
             list.push(lat, lng, types, rate)
             //Uncomment line below to test.
-            //console.log(list) 
+            //console.log(list)
             //var long = Number(pop.results[0].geometry.location.lng)
             //var type = pop.results[0].rating;
             //callback(long);
