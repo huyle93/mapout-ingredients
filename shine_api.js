@@ -55,7 +55,7 @@ var stats_car_mpg = data[0].Comb_Conventional_Fuel;
 function httpsGetStats(make, model, year, callback){
   var stats_options = {
     host: 'apis.solarialabs.com',
-    path: '/shine/v1/vehicle-stats/specs?make=' + make + '&model=' + model + '&year=' + year + '&apikey=' + shine_key,
+    path: '/shine/v1/vehicle-stats/specs?make=' + make + '&model=' + model + '&year=' + year + '&full-data=true&apikey=' + shine_key,
     method: 'GET'
   }
 
