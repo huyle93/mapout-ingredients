@@ -73,7 +73,7 @@ function httpsGetStats(make, model, year, callback){
       var stats_make = response[0].Make
       var stats_model = response[0].Model
       var stats_car_year = response[0].Model_Year
-      var stats_car_mpg = response[0].Comb_Conventional_Fuel
+      var stats_car_mpg = response[0].City_Conventional_Fuel
 
       console.log( "Model Year of the " + stats_make + " " + stats_model + " is: " + stats_car_year + ". The combined highway and city MPG is " + stats_car_mpg + ".");
       callback([stats_car_year, stats_car_mpg]);
