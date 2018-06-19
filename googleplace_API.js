@@ -1,16 +1,11 @@
 require('dotenv').load()
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Google place API call
-var https = require('https');
-var location = -33.8670522;
-var location_2 = 151.1957362;
-var rank = 'distance';
-var type = 'parking';
-var rate = 5;
+
 httpsGetmyGoogleplace(location, location_2, rank, type, rate, (myResult) => {
     // Uncomment this two line to test
-    //console.log("sent     : " + address);
-    //console.log("received : " + myResult);
+    console.log("sent     : " + address);
+    console.log("received : " + myResult);
 });
 function httpsGetmyGoogleplace(lat, lng, rankby, types, rating, callback) {
     var googlePlacekey = process.env.googleplace_KEY
@@ -20,7 +15,6 @@ function httpsGetmyGoogleplace(lat, lng, rankby, types, rating, callback) {
         port: 443,
         path: `/maps/api/place/nearbysearch/json?location=${lat},${lng}&rankby=${rankby}&types=${types}&rating=${rating}&key=` + googlePlacekey,
         method: 'GET',
-
         // if x509 certs are required:
         // key: fs.readFileSync('certs/my-key.pem'),
         // cert: fs.readFileSync('certs/my-cert.pem')
@@ -28,7 +22,6 @@ function httpsGetmyGoogleplace(lat, lng, rankby, types, rating, callback) {
     var req = https.request(options, res => {
         res.setEncoding('utf8');
         var returnData = "";
-
         res.on('data', chunk => {
             returnData = returnData + chunk;
         });
@@ -45,7 +38,7 @@ function httpsGetmyGoogleplace(lat, lng, rankby, types, rating, callback) {
             var rate = pop.results[0].rating;
             list.push(lat, lng, types, rate)
             //Uncomment line below to test.
-            //console.log(list)
+            console.log(list)
             //var long = Number(pop.results[0].geometry.location.lng)
             //var type = pop.results[0].rating;
             //callback(long);
