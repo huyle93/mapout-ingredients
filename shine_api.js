@@ -4,6 +4,7 @@ var https = require('https');
 //Shine API car Theft
 let request = require('request')
 var shine_key = process.env.shineapi_KEY
+var wait = 1;
 
 function httpsGetTheftStats( stateCode, callback){
   var theft_options = {
@@ -27,8 +28,8 @@ function httpsGetTheftStats( stateCode, callback){
         var theft_model = response[0].Model
         var theft_state = response[0].State
 
-        console.log( "The #1 most stolen car in " + theft_state + " is the "+ theft_make + " " + theft_model + ".");
-        callback([theft_make, theft_model]);
+        //console.log( "The #1 most stolen car in " + theft_state + " is the "+ theft_make + " " + theft_model + ".");
+        callback(theft_make, theft_model);
     });
     });
 
@@ -60,11 +61,11 @@ function httpsGetStats(make, model, year, callback){
       var stats_car_year = response[0].Model_Year
       var stats_car_mpg = response[0].City_Conventional_Fuel
 
-      console.log( "Model Year of the " + stats_make + " " + stats_model + " is: " + stats_car_year + ". The combined highway and city MPG is " + stats_car_mpg + ".");
-      callback([stats_car_year, stats_car_mpg]);
+      //console.log( "Model Year of the " + stats_make + " " + stats_model + " is: " + stats_car_year + ". The combined highway and city MPG is " + stats_car_mpg + ".");
+      callback(stats_car_year, stats_car_mpg);
   });
   });
-
+  wait = 0;
   req.end();
 }
 
@@ -91,17 +92,26 @@ function httpsGetPredictionStats(best_or_worst, callback){
       var predict_manufacturer = response[0].Manufacturer
       var predict_model = response[0].Model
 
-      console.log( 'The predicted ' + best_or_worst + ' model of car based on the increased amount spent over 5 years is the ' + predict_manufacturer + ' ' + predict_model + '.' );
+      //console.log( 'The predicted ' + best_or_worst + ' model of car based on the increased amount spent over 5 years is the ' + predict_manufacturer + ' ' + predict_model + '.' );
       callback([predict_manufacturer, predict_model]);
   });
   });
-
   req.end();
 }
 
-httpsGetStats( "toyota", "camry", "2011", (stats) => {
-  var year = stats[0];
-  var mpg = stats[1];
+
+console.log(encodeURIComponent("boston"))
+
+httpsGetStats( "toyota", "camry", "2011", function stats(car_year, car_mpg) {
+  var year = car_year;
+  var mpg = car_mpg;
+  console.log( year + " " + mpg );
+  httpsGetTheftStats( "nh", function theft_car( make, model ) {
+    var theft_car_make = make;
+    var theft_car_model = model;
+    console.log( year + " " + mpg );
+    console.log( theft_car_make + " " + theft_car_model );
+  })
 })
 
 httpsGetTheftStats( "nh", (theft_car) => {

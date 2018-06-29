@@ -1,13 +1,14 @@
 require('dotenv').load()
 //const key = require('./config.js')
 var https = require('https');
-var address = 'Boston Museum';
+var address = 'Fenway';
 //This is for geocode google API call
 httpsGetgeocode(address, (myResult) => {
     //Uncomment this line to test
     console.log("sent     : " + address);
     console.log("received : " + myResult);
 });
+
 function httpsGetgeocode(myData, callback) {
     // Update these options with the details of the web service you would like to call
     var google_key = process.env.googleAPI_KEY
@@ -70,10 +71,3 @@ console.log(data.results[0].geometry.location.lng)
 }
 //Uncomment the line below to test
 //var test = google()
-
-
-
-
-
-
-
