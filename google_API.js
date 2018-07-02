@@ -5,8 +5,8 @@ var address = 'Fenway';
 //This is for geocode google API call
 httpsGetgeocode(address, (myResult) => {
     //Uncomment this line to test
-    console.log("sent     : " + address);
-    console.log("received : " + myResult);
+    //console.log("sent     : " + address);
+    //console.log("received : " + myResult);
 });
 
 function httpsGetgeocode(myData, callback) {
@@ -37,8 +37,7 @@ function httpsGetgeocode(myData, callback) {
             var pop = JSON.parse(returnData);
             var lat = Number(pop.results[0].geometry.location.lat)
             var lng = Number(pop.results[0].geometry.location.lng)
-            callback(lat);
-            callback(lng);
+            callback(lat, lng);
             // this will execute whatever function the caller defined, with one argument
         });
     });
@@ -71,3 +70,5 @@ console.log(data.results[0].geometry.location.lng)
 }
 //Uncomment the line below to test
 //var test = google()
+
+module.exports = {httpsGetgeocode};

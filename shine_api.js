@@ -99,42 +99,4 @@ function httpsGetPredictionStats(best_or_worst, callback){
   req.end();
 }
 
-
-console.log(encodeURIComponent("boston"))
-
-httpsGetStats( "toyota", "camry", "2011", function stats(car_year, car_mpg) {
-  var year = car_year;
-  var mpg = car_mpg;
-  console.log( year + " " + mpg );
-  httpsGetTheftStats( "nh", function theft_car( make, model ) {
-    var theft_car_make = make;
-    var theft_car_model = model;
-    console.log( year + " " + mpg );
-    console.log( theft_car_make + " " + theft_car_model );
-  })
-})
-
-httpsGetTheftStats( "nh", (theft_car) => {
-  var theft_car_make = theft_car[0];
-  var theft_car_model = theft_car[1];
-})
-
-httpsGetTheftStats( "ak", (theft_car) => {
-  var theft_car_make = theft_car[0];
-  var theft_car_model = theft_car[1];
-})
-
-httpsGetTheftStats( "ca", (theft_car) => {
-  var theft_car_make = theft_car[0];
-  var theft_car_model = theft_car[1];
-})
-
-httpsGetPredictionStats( "best", (prediction_car) => {
-  var prediction_car_make = prediction_car[0];
-  var prediction_car_model = prediction_car[1];
-})
-
-httpsGetPredictionStats( "worst", (prediction_car) => {
-  var prediction_car_make = prediction_car[0];
-  var prediction_car_model = prediction_car[1];
-})
+module.exports = { httpsGetStats, httpsGetTheftStats }

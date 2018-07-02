@@ -82,3 +82,5 @@ function httpsGet_Matrix(lat, long, callback) {
     req.end();
 
 }
+
+module.exports = httpsGet_Matrix;
