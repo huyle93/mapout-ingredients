@@ -1,12 +1,15 @@
 require('dotenv').load()
+var https = require('https');
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Google place API call
 
-httpsGetmyGoogleplace(location, location_2, rank, type, rate, (myResult) => {
+
+httpsGetmyGoogleplace(42.3428653, -71.1002881, 3, "garage", 35, (myResult) => {
     // Uncomment this two line to test
     console.log("sent     : " + address);
     console.log("received : " + myResult);
 });
+
 function httpsGetmyGoogleplace(lat, lng, rankby, types, rating, callback) {
     var googlePlacekey = process.env.googleplace_KEY
     // Update these options with the details of the web service you would like to call

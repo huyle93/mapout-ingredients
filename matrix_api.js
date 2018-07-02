@@ -44,8 +44,9 @@ httpsGet_Matrix( lat, long, (matrix) => {
     var distancetext = matrix[1]
     var durationvalue = matrix[2] // int
     var durationtext = matrix[3]
-    console.log("The Distance between Durham to Fenway is " + distancetext + " (" + distancevalue + ") It will take around: " + durationtext + " (" + durationvalue + ") to get there")
+    //console.log("The Distance between Durham to Fenway is " + distancetext + " (" + distancevalue + ") It will take around: " + durationtext + " (" + durationvalue + ") to get there")
 })
+
 function httpsGet_Matrix(lat, long, callback) {
     // Update these options with the details of the web service you would like to call
     var options = {
@@ -75,7 +76,7 @@ function httpsGet_Matrix(lat, long, callback) {
             var distancetext = data.rows[0].elements[0].distance.text;
             var durationvalue = data.rows[0].elements[0].duration.value;
             var durationtext = data.rows[0].elements[0].duration.text;
-            callback([distancevalue, distancetext, durationvalue, durationtext]);
+            callback(distancevalue, distancetext, durationvalue, durationtext);
             // this will execute whatever function the caller defined, with one argument
         });
     });
@@ -83,4 +84,4 @@ function httpsGet_Matrix(lat, long, callback) {
 
 }
 
-module.exports = httpsGet_Matrix;
+module.exports = {httpsGet_Matrix};

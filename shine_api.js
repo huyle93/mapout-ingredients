@@ -4,7 +4,6 @@ var https = require('https');
 //Shine API car Theft
 let request = require('request')
 var shine_key = process.env.shineapi_KEY
-var wait = 1;
 
 function httpsGetTheftStats( stateCode, callback){
   var theft_options = {
@@ -60,12 +59,9 @@ function httpsGetStats(make, model, year, callback){
       var stats_model = response[0].Model
       var stats_car_year = response[0].Model_Year
       var stats_car_mpg = response[0].City_Conventional_Fuel
-
-      //console.log( "Model Year of the " + stats_make + " " + stats_model + " is: " + stats_car_year + ". The combined highway and city MPG is " + stats_car_mpg + ".");
       callback(stats_car_year, stats_car_mpg);
   });
   });
-  wait = 0;
   req.end();
 }
 

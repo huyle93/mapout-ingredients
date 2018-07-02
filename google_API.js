@@ -1,12 +1,15 @@
 require('dotenv').load()
 //const key = require('./config.js')
 var https = require('https');
-var address = 'Fenway';
+var address = 'Franconia Ridge';
 //This is for geocode google API call
-httpsGetgeocode(address, (myResult) => {
+httpsGetgeocode(address, function myResult(lat,long){
     //Uncomment this line to test
-    //console.log("sent     : " + address);
-    //console.log("received : " + myResult);
+
+    console.log("sent     : " + address);
+    console.log("received lat: " + lat);
+    console.log("received long: " + long);
+
 });
 
 function httpsGetgeocode(myData, callback) {
@@ -34,10 +37,10 @@ function httpsGetgeocode(myData, callback) {
             // We can see it in the log output via:
             // console.log(JSON.stringify(returnData))
             // we may need to parse through it to extract the needed data
-            var pop = JSON.parse(returnData);
-            var lat = Number(pop.results[0].geometry.location.lat)
-            var lng = Number(pop.results[0].geometry.location.lng)
-            callback(lat, lng);
+              var pop = JSON.parse(returnData);
+              var lat = Number(pop.results[0].geometry.location.lat)
+              var lng = Number(pop.results[0].geometry.location.lng)
+              callback(lat, lng);
             // this will execute whatever function the caller defined, with one argument
         });
     });
