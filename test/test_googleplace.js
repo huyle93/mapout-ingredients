@@ -1,51 +1,52 @@
-var assert = require('assert');
+require('dotenv').load();
+let request = require('request')
+var assert = require('chai').assert
 var sinon = require('sinon');
 var PassThrough = require('stream').PassThrough;
-var http = require('http').createServer(function(req, res) {
-});
-var chai = require('chai')
-  , chaiHttp = require('chai-http');
-  var api = require('../googleplace_API.js');
-  chai.use(chaiHttp);
+let chai = require('chai');
+let chaiHttp = require('chai-http');
+
+chai.use(chaiHttp);
+
+var place = require('../googleplace_API.js');
 
 
-describe('googleplace', function() {
+describe('Googleplace', function() {
 	beforeEach(function() {
 		this.request = sinon.stub(chai, 'request');
 	});
 
 	afterEach(function() {
-		http.request.restore();
+		chai.request.restore();
 	});
 
 
-    //We will place our tests cases here
-    var location = 42.3428653
-    var location_2 = -71.1002881
-    var rank = "distance"
-    var type = "parking"
-    var rate = 5
-    it('should convert get long and lat and type and rate',  function (done) {
-        var expected = 25
+    it('Should return rating of closest parking garage',  function (done) {
+        var expected = 3
         var response = new PassThrough();
         response.write(JSON.stringify(expected));
         response.end();
         var request = new PassThrough();
         this.request.callsArgWith(1, response)
                     .returns(request);
-        api.httpsGetmyGoogleplace(location, location_2,rank,type,rate,function(long,lat) {
-            // Uncomment this two line to test
-            //assert.deepEqual(myResult,expected)
-            //console.log("sent     : " + address);
-            //console.log("received : " + myResult);
-            assert.equal(rate, expected);
-			done();
+        place.httpsGetmyGoogleplace(42.3393661, -71.0999358, "distance", "parking", function myResult(rating, name, lat, long) {
+            assert.equal(rating, expected);
+			      done();
+        });
+    })
+
+    it('Should return name of closest parking garage',  function (done) {
+        var expected = "simmons parking garage entrance road"
+        var response = new PassThrough();
+        response.write(JSON.stringify(expected));
+        response.end();
+        var request = new PassThrough();
+        this.request.callsArgWith(1, response)
+                    .returns(request);
+
+        place.httpsGetmyGoogleplace(42.3393661, -71.0999358, "distance", "parking", function myResult(rating, name, lat, long) {
+            assert.equal(name.toLowerCase(), expected.toLowerCase());
+            done();
         });
     })
 })
-
-
-    
-
-
-

@@ -1,6 +1,7 @@
 require('dotenv').load();
 let request = require('request')
 var assert = require('chai').assert
+//var expect = require('chai').expect
 var sinon = require('sinon');
 var PassThrough = require('stream').PassThrough;
 let chai = require('chai');
@@ -9,9 +10,6 @@ let chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 var shine = require('../shine_api.js');
-
-
-
 ///////////////////////////////////////////////////////////////////////////
 //////////////CAR STATS UNIT TEST/////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
@@ -114,22 +112,17 @@ describe('Car Stats', function() {
 			});
 	});
 
-	/*
-	it('A car with a year under 2010 should return null', function(done) {
-			var expected = null;
-			var response = new PassThrough();
-			response.write(JSON.stringify(expected));
-			response.end();
+  it('should fail', function(done) {
+	var expected = '2009';
+	var request = new PassThrough();
 
-			this.request.callsArgWith(1, response)
-									.returns(new PassThrough());
+	this.request.returns(request);
 
-			shine.httpsGetStats("Ferrari", "F12","2009",function(year, mpg) {
-				assert.equal(year, expected);
-				done();
-			});
-	});
-	*/
+  var bad = shine.httpsGetStats("Ferrari", "F12","2009",function(year, mpg) {})
+  expect(bad).to.throw(TypeError)
+  done();
+  });
+
 });
 
 ///////////////////////////////////////////////////////////////////////////

@@ -21,8 +21,8 @@ describe('Matrix', function() {
 		chai.request.restore();
 	});
 
-	it('Should return distance to Boston as text', function(done) {
-		var expected = "67.1 mi";
+	it('Should return distance to Franconia Ridge as text', function(done) {
+		var expected = "103 mi";
 		var response = new PassThrough();
 		response.write(JSON.stringify(expected));
 		response.end();
@@ -30,14 +30,14 @@ describe('Matrix', function() {
 		this.request.callsArgWith(1, response)
 		            .returns(new PassThrough());
 
-		mat.httpsGet_Matrix(42.3428653, -71.1002881, function matrix(mat_dis_val, mat_dis_txt, mat_dur_val, mat_dur_txt) {
+		mat.httpsGet_Matrix(44.160833, -71.6446673, function matrix(mat_dis_val, mat_dis_txt, mat_dur_val, mat_dur_txt) {
 			assert.equal(mat_dis_txt.toLowerCase(), expected.toLowerCase());
 			done();
 		});
 	});
 
-	it('Should return duration to Boston as text', function(done) {
-		var expected = "1 hour 17 mins";
+	it('Should return duration to Franconia Ridge as text', function(done) {
+		var expected = "1 hour 45 mins";
 		var response = new PassThrough();
 		response.write(JSON.stringify(expected));
 		response.end();
@@ -45,7 +45,7 @@ describe('Matrix', function() {
 		this.request.callsArgWith(1, response)
 		            .returns(new PassThrough());
 
-		mat.httpsGet_Matrix(42.3428653, -71.1002881, function matrix(mat_dis_val, mat_dis_txt, mat_dur_val, mat_dur_txt) {
+		mat.httpsGet_Matrix(44.160833, -71.6446673, function matrix(mat_dis_val, mat_dis_txt, mat_dur_val, mat_dur_txt) {
 			assert.equal( mat_dur_txt.toLowerCase(), expected.toLowerCase());
 			done();
 		});

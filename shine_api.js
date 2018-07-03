@@ -60,8 +60,13 @@ function httpsGetStats(make, model, year, callback){
       var stats_car_year = response[0].Model_Year
       var stats_car_mpg = response[0].City_Conventional_Fuel
       callback(stats_car_year, stats_car_mpg);
+    });
   });
-  });
+
+  req.on('error', function(err) {
+		callback('err');
+	});
+
   req.end();
 }
 

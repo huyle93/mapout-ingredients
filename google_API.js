@@ -5,11 +5,11 @@ var address = 'Franconia Ridge';
 //This is for geocode google API call
 httpsGetgeocode(address, function myResult(lat,long){
     //Uncomment this line to test
-
+    /*
     console.log("sent     : " + address);
     console.log("received lat: " + lat);
     console.log("received long: " + long);
-
+    */
 });
 
 function httpsGetgeocode(myData, callback) {

@@ -25,8 +25,8 @@ describe('Geocode', function() {
 		chai.request.restore();
 	});
 
-	it('Should return correct latitude of fenway', function(done) {
-		var expected = 42.3428653;
+	it('Should return correct latitude of Franconia Ridge', function(done) {
+		var expected = 44.160833
 		var response = new PassThrough();
 		response.write(JSON.stringify(expected));
 		response.end();
@@ -34,14 +34,14 @@ describe('Geocode', function() {
 		this.request.callsArgWith(1, response)
 		            .returns(new PassThrough());
 
-		google.httpsGetgeocode("fenway", function geocode(geo_lat, geo_long) {
+		google.httpsGetgeocode("franconia ridge", function geocode(geo_lat, geo_long) {
 			assert.equal(geo_lat, expected);
 			done();
 		});
 	});
 
-	it('Should return correct longitude of fenway', function(done) {
-		var expected = -71.1002881;
+	it('Should return correct longitude of Franconia Ridge', function(done) {
+		var expected = -71.644667;
 		var response = new PassThrough();
 		response.write(JSON.stringify(expected));
 		response.end();
@@ -49,7 +49,7 @@ describe('Geocode', function() {
 		this.request.callsArgWith(1, response)
 		            .returns(new PassThrough());
 
-		google.httpsGetgeocode("fenway", function geocode(geo_lat, geo_long) {
+		google.httpsGetgeocode("franconia ridge", function geocode(geo_lat, geo_long) {
 			assert.equal( geo_long, expected);
 			done();
 		});
@@ -128,8 +128,8 @@ describe('Matrix', function() {
 		chai.request.restore();
 	});
 
-	it('Should return distance to Boston as text', function(done) {
-		var expected = "67.1 mi";
+	it('Should return distance to Franconia Ridge as text', function(done) {
+		var expected = "103 mi";
 		var response = new PassThrough();
 		response.write(JSON.stringify(expected));
 		response.end();
@@ -137,14 +137,14 @@ describe('Matrix', function() {
 		this.request.callsArgWith(1, response)
 		            .returns(new PassThrough());
 
-		mat.httpsGet_Matrix(42.3428653, -71.1002881, function matrix(mat_dis_val, mat_dis_txt, mat_dur_val, mat_dur_txt) {
+		mat.httpsGet_Matrix(44.160833, -71.6446673, function matrix(mat_dis_val, mat_dis_txt, mat_dur_val, mat_dur_txt) {
 			assert.equal(mat_dis_txt.toLowerCase(), expected.toLowerCase());
 			done();
 		});
 	});
 
-	it('Should return duration to Boston as text', function(done) {
-		var expected = "1 hour 17 mins";
+	it('Should return duration to Franconia Ridge as text', function(done) {
+		var expected = "1 hour 45 mins";
 		var response = new PassThrough();
 		response.write(JSON.stringify(expected));
 		response.end();
@@ -152,7 +152,7 @@ describe('Matrix', function() {
 		this.request.callsArgWith(1, response)
 		            .returns(new PassThrough());
 
-		mat.httpsGet_Matrix(42.3428653, -71.1002881, function matrix(mat_dis_val, mat_dis_txt, mat_dur_val, mat_dur_txt) {
+		mat.httpsGet_Matrix(44.160833, -71.6446673, function matrix(mat_dis_val, mat_dis_txt, mat_dur_val, mat_dur_txt) {
 			assert.equal( mat_dur_txt.toLowerCase(), expected.toLowerCase());
 			done();
 		});
