@@ -7,7 +7,7 @@ var https = require('https');
   //"url": "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592&key=" + matrixKey,
   //"method": "GET",
   //"qs": {
-    
+
   //}
 //}
 //This function to go through the json and get it out.
@@ -36,16 +36,17 @@ function getMinutes(i) {
 // Matrix
 var myCoordinates = [43.1389480, -70.9370250]
 
-lat = 40.6905615
-long = -73.9976592
+lat = 42.3428653
+long = -71.1002881
 
 httpsGet_Matrix( lat, long, (matrix) => {
     var distancevalue = matrix[0] // int
     var distancetext = matrix[1]
     var durationvalue = matrix[2] // int
     var durationtext = matrix[3]
-    console.log("The Distance between Durham to Brookly is " + distancetext + " It will take around: " + durationtext + " to get there")
+    //console.log("The Distance between Durham to Fenway is " + distancetext + " (" + distancevalue + ") It will take around: " + durationtext + " (" + durationvalue + ") to get there")
 })
+
 function httpsGet_Matrix(lat, long, callback) {
     // Update these options with the details of the web service you would like to call
     var options = {
@@ -74,8 +75,8 @@ function httpsGet_Matrix(lat, long, callback) {
             var distancevalue = data.rows[0].elements[0].distance.value;
             var distancetext = data.rows[0].elements[0].distance.text;
             var durationvalue = data.rows[0].elements[0].duration.value;
-            var durationtext = data.rows[0].elements[0].duration.text;            
-            callback([distancevalue, distancetext, durationvalue, durationtext]);
+            var durationtext = data.rows[0].elements[0].duration.text;
+            callback(distancevalue, distancetext, durationvalue, durationtext);
             // this will execute whatever function the caller defined, with one argument
         });
     });
@@ -83,8 +84,4 @@ function httpsGet_Matrix(lat, long, callback) {
 
 }
 
-
-
- 
-
-    
+module.exports = {httpsGet_Matrix};
