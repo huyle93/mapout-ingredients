@@ -4,14 +4,14 @@ var https = require('https');
 // Google place API call
 
 
-httpsGetmyGoogleplace(42.3393661, -71.0999358, "distance", "parking", function myResult(rating, name, lat, long) {
+httpsGetmyGoogleplace(42.3428653, -71.1002881, "distance", "parking", function myResult(rating, name, lat, long) {
     // Uncomment this two line to test
-    /*
+
     console.log("received rating: " + rating );
     console.log("received name: " + name );
     console.log("received lat: " + lat );
     console.log("received long: " + long );
-    */
+    
 });
 
 function httpsGetmyGoogleplace(lat, long, rankby, types, callback) {
@@ -44,7 +44,7 @@ function httpsGetmyGoogleplace(lat, long, rankby, types, callback) {
               var lng = Number(pop.results[0].geometry.location.lng);
               var rate = pop.results[0].rating;
             //Uncomment line below to test.
-            callback(rate, name, lat, lng)
+            callback(lat, long, rate, name)
             //var long = Number(pop.results[0].geometry.location.lng)
             //var type = pop.results[0].rating;
             //callback(long);

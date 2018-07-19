@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 var google = require('../google_API.js');
 
 ///////////////////////////////////////////////////////////////////////////
-//////////////GEOCODE UNIT TEST/////////////////////////////////////////
+/////////////////GEOCODE UNIT TEST/////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 describe('Geocode', function() {
 	beforeEach(function() {
@@ -23,8 +23,8 @@ describe('Geocode', function() {
 		chai.request.restore();
 	});
 
-	it('Should return correct latitude of fenway', function(done) {
-		var expected = 42.3428653;
+	it('Should return correct latitude of Franconia Ridge', function(done) {
+		var expected = 44.160833
 		var response = new PassThrough();
 		response.write(JSON.stringify(expected));
 		response.end();
@@ -32,14 +32,14 @@ describe('Geocode', function() {
 		this.request.callsArgWith(1, response)
 		            .returns(new PassThrough());
 
-		google.httpsGetgeocode("fenway", function geocode(geo_lat, geo_long) {
+		google.httpsGetgeocode("franconia ridge", function geocode(geo_lat, geo_long) {
 			assert.equal(geo_lat, expected);
 			done();
 		});
 	});
 
-	it('Should return correct longitude of fenway', function(done) {
-		var expected = -71.1002881;
+	it('Should return correct longitude of Franconia Ridge', function(done) {
+		var expected = -71.644667;
 		var response = new PassThrough();
 		response.write(JSON.stringify(expected));
 		response.end();
@@ -47,7 +47,7 @@ describe('Geocode', function() {
 		this.request.callsArgWith(1, response)
 		            .returns(new PassThrough());
 
-		google.httpsGetgeocode("fenway", function geocode(geo_lat, geo_long) {
+		google.httpsGetgeocode("franconia ridge", function geocode(geo_lat, geo_long) {
 			assert.equal( geo_long, expected);
 			done();
 		});
@@ -83,7 +83,7 @@ describe('Geocode', function() {
 		});
 	});
 
-	it('Should return correct latitude of Simmons College Boston', function(done) {
+	it('Should return correct latitude of Fenway', function(done) {
 		var expected = 42.3393661;
 		var response = new PassThrough();
 		response.write(JSON.stringify(expected));
@@ -98,7 +98,7 @@ describe('Geocode', function() {
 		});
 	});
 
-	it('Should return correct longitude of Simmons College Boston', function(done) {
+	it('Should return correct longitude of Fenway', function(done) {
 		var expected = -71.0999358;
 		var response = new PassThrough();
 		response.write(JSON.stringify(expected));

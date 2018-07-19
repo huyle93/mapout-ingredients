@@ -1,7 +1,7 @@
 require('dotenv').load();
 let request = require('request')
 var assert = require('chai').assert
-//var expect = require('chai').expect
+var expect = require('chai').expect
 var sinon = require('sinon');
 var PassThrough = require('stream').PassThrough;
 let chai = require('chai');
@@ -112,17 +112,55 @@ describe('Car Stats', function() {
 			});
 	});
 
-  it('should fail', function(done) {
-	var expected = '2009';
-	var request = new PassThrough();
+	/*
+	it('Should fail if less than 4 arguements', function(done) {
+		var request = new PassThrough();
 
-	this.request.returns(request);
+		this.request.returns(request);
 
-  var bad = shine.httpsGetStats("Ferrari", "F12","2009",function(year, mpg) {})
-  expect(bad).to.throw(TypeError)
-  done();
-  });
+		shine.httpsGetStats("Ferrari", "F12", function(year, mpg){});
+		expect.fail;
+		done();
+	});
+	
 
+	it('Should fail if invalid make or model', function(done) {
+		var expected = null;
+		var response = new PassThrough();
+		response.write(JSON.stringify(expected));
+		response.end();
+
+		this.request.callsArgWith(1, response)
+								.returns(new PassThrough());
+
+		shine.httpsGetStats("Ferari", "F12","2015",function(year, mpg) {
+			assert.equal(year, expected);
+			done();
+		});
+	});
+
+	/*
+	it('Should fail if year before 2010', function(done) {
+		var request = new PassThrough();
+
+		this.request.returns(request);
+
+		shine.httpsGetStats("Ferari", "F12", 2009, function(year, mpg){});
+		expect.fail;
+		done();
+	});
+
+
+  it('Should fail if more than 4 arguements', function(done) {
+		var request = new PassThrough();
+
+		this.request.returns(request);
+
+	  shine.httpsGetStats("Ferrari", "F12","2009", 23, function(year, mpg){});
+		expect.fail;
+		done();
+	});
+	*/
 });
 
 ///////////////////////////////////////////////////////////////////////////

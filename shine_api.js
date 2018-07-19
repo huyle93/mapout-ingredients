@@ -5,34 +5,39 @@ var https = require('https');
 let request = require('request')
 var shine_key = process.env.shineapi_KEY
 
-function httpsGetTheftStats( stateCode, callback){
-  var theft_options = {
-    host: 'apis.solarialabs.com',
-    path: '/shine/v1/vehicle-thefts?state=' + stateCode + '&apikey=' + shine_key,
-    method: 'GET'
-  }
+var theft_stats = [];
 
-    var req = https.request(theft_options, function(res) {
-    res.setEncoding('utf-8');
+function httpsGetTheftStats( stateCode){
+  var promise = new Promise(function(resolve, reject){
+    var theft_options = {
+      host: 'apis.solarialabs.com',
+      path: '/shine/v1/vehicle-thefts?state=' + stateCode + '&apikey=' + shine_key,
+      method: 'GET'
+    }
 
-    var responseString = '';
+      var req = https.request(theft_options, function(res) {
+      res.setEncoding('utf-8');
 
-    res.on('data', function(data) {
-        responseString += data;
+      var responseString = '';
+
+      res.on('data', function(data) {
+          responseString += data;
+      });
+
+      res.on('end', function() {
+          var response = JSON.parse(responseString);
+          var theft_make = response[0].Make
+          var theft_model = response[0].Model
+          var theft_state = response[0].State
+          var list = [theft_make,theft_model]
+          //console.log( "The #1 most stolen car in " + theft_state + " is the "+ theft_make + " " + theft_model + ".");
+          resolve(list);
+      });
+      });
+
+      req.end();
     });
-
-    res.on('end', function() {
-        var response = JSON.parse(responseString);
-        var theft_make = response[0].Make
-        var theft_model = response[0].Model
-        var theft_state = response[0].State
-
-        //console.log( "The #1 most stolen car in " + theft_state + " is the "+ theft_make + " " + theft_model + ".");
-        callback(theft_make, theft_model);
-    });
-    });
-
-    req.end();
+    return promise
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,20 +58,15 @@ function httpsGetStats(make, model, year, callback){
       responseString += data;
   });
 
-  res.on('end', function() {
-      var response = JSON.parse(responseString);
-      var stats_make = response[0].Make
-      var stats_model = response[0].Model
-      var stats_car_year = response[0].Model_Year
-      var stats_car_mpg = response[0].City_Conventional_Fuel
-      callback(stats_car_year, stats_car_mpg);
-    });
-  });
 
-  req.on('error', function(err) {
-		callback('err');
-	});
-
+      res.on('end', function() {
+          var response = JSON.parse(responseString);
+          var stats_make = response[0].Make
+          var stats_model = response[0].Model
+          var stats_car_year = response[0].Model_Year
+          var stats_car_mpg = response[0].City_Conventional_Fuel
+          callback([stats_car_year, stats_car_mpg]);
+  })
   req.end();
 }
 
@@ -99,5 +99,12 @@ function httpsGetPredictionStats(best_or_worst, callback){
   });
   req.end();
 }
+
+httpsGetTheftStats('ma').then((res) => { theft_stats = res})
+
+//.then(console.log( theft_stats[0] + " + " + theft_stats[1]))
+
+//console.log( res[0] + " + " + res[1])
+//console.log( theft_stats[0] + " + " + theft_stats[1])
 
 module.exports = { httpsGetStats, httpsGetTheftStats }

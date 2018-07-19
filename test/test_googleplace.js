@@ -9,7 +9,8 @@ let chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 var place = require('../googleplace_API.js');
-
+var rankby = "distance";
+var type = "parking"
 
 describe('Googleplace', function() {
 	beforeEach(function() {
@@ -21,7 +22,7 @@ describe('Googleplace', function() {
 	});
 
 
-    it('Should return rating of closest parking garage',  function (done) {
+    it('Should return rating of closest parking garage to Fenway',  function (done) {
         var expected = 3
         var response = new PassThrough();
         response.write(JSON.stringify(expected));
@@ -29,13 +30,13 @@ describe('Googleplace', function() {
         var request = new PassThrough();
         this.request.callsArgWith(1, response)
                     .returns(request);
-        place.httpsGetmyGoogleplace(42.3393661, -71.0999358, "distance", "parking", function myResult(rating, name, lat, long) {
+        place.httpsGetmyGoogleplace(42.3393661, -71.0999358, rankby, type, function myResult(rating, name) {
             assert.equal(rating, expected);
 			      done();
         });
     })
 
-    it('Should return name of closest parking garage',  function (done) {
+    it('Should return name of closest parking garage to Fenway',  function (done) {
         var expected = "simmons parking garage entrance road"
         var response = new PassThrough();
         response.write(JSON.stringify(expected));
@@ -44,7 +45,7 @@ describe('Googleplace', function() {
         this.request.callsArgWith(1, response)
                     .returns(request);
 
-        place.httpsGetmyGoogleplace(42.3393661, -71.0999358, "distance", "parking", function myResult(rating, name, lat, long) {
+        place.httpsGetmyGoogleplace(42.3393661, -71.0999358, rankby, type, function myResult(rating, name, lat, long) {
             assert.equal(name.toLowerCase(), expected.toLowerCase());
             done();
         });

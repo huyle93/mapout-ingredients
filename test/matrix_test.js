@@ -67,7 +67,7 @@ describe('Matrix', function() {
 	});
 
 	it('Should return duration to College of William and Mary as text', function(done) {
-		var expected = "10 hours 15 mins";
+		var expected = "10 hours 13 mins";
 		var response = new PassThrough();
 		response.write(JSON.stringify(expected));
 		response.end();
