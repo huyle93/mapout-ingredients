@@ -8,7 +8,7 @@ var myCoordinates = [43.1389480, -70.9370250]
 function get_price(lat, long, callback) {
     let request = require('request')
     let options = {
-        "url": `http://api.mygasfeed.com/stations/radius/${lat}/${long}/5/reg/price/0tsuii9i8o.json`,
+        "url": `http://api.mygasfeed.com/stations/radius/43.220338/-70.8855611/5/reg/price/0tsuii9i8o.json`,
         "method": "GET",
         "qs": {
             //"address": "2+old+english+village+apt+110",
@@ -22,7 +22,10 @@ function get_price(lat, long, callback) {
         var sum_price = 0;
         for(var i = 0; i < data.stations.length; i++)
         {
-          sum_price += Number(data.stations[i].reg_price)
+          if(data.stations[i].reg_price !== "N\/A")
+          {
+            sum_price += Number(data.stations[i].reg_price)
+          }
         }
         var avg_price = (sum_price/data.stations.length)
         callback([avg_price]);

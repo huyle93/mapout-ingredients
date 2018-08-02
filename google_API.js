@@ -1,7 +1,7 @@
 require('dotenv').load()
 //const key = require('./config.js')
 var https = require('https');
-var address = 'Fenway';
+var address = '21 Madbury Rd UNIT231 Durham NH';
 //This is for geocode google API call
 httpsGetgeocode(address, function myResult(lat,long){
     //Uncomment this line to test
@@ -15,6 +15,8 @@ httpsGetgeocode(address, function myResult(lat,long){
 function httpsGetgeocode(myData, callback) {
     // Update these options with the details of the web service you would like to call
     var google_key = process.env.googleAPI_KEY
+    var lat;
+    var lng;
     var options = {
         host: 'maps.googleapis.com',
         port: 443,
