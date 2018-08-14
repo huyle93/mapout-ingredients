@@ -2,7 +2,7 @@ var https = require('https');
 
 function httpsGet_User(myData, callback) {
     var get_options = {
-        host:  'mapout-mockdb-4ead8.firebaseio.com',
+        host:  'mapout-e7487.firebaseio.com',
         port: '443',
         path: '/User.json',
         method: 'GET'
@@ -38,7 +38,7 @@ function httpsPost_Address(City, State, Code, callback) {
     }
 
     var post_options = {
-        host:  'mapout-mockdb-4ead8.firebaseio.com',
+        host:  'mapout-e7487.firebaseio.com',
         port: '443',
         path: '/Address.json',
         method: 'POST',
@@ -77,9 +77,9 @@ function httpsPost_User(Name, Age, callback) {
     }
 
     var post_options = {
-        host:  'mapout-mockdb-4ead8.firebaseio.com',
+        host:  'mapout-e7487.firebaseio.com',
         port: '443',
-        path: '/User.json',
+        path: '/Name.json',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -111,16 +111,12 @@ function httpsPost_User(Name, Age, callback) {
 var myRequest = 'User';
 
 
-httpsGet_User(myRequest,  myResult => {
-  //console.log("Name: " + myResult[0] + " Age: " + myResult[1]);
-});
-
 httpsPost_User("John Doe", "25",  myResult => {
   //console.log("sent     : " + myRequest);
-  //console.log("received : " + myResult);
+  console.log("received : " + myResult);
 });
 
 httpsPost_Address("Durham", "New Hampshire", "03824",  myResult => {
-  //console.log("sent     : " + myRequest);
-  //console.log("received : " + myResult);
+//   console.log("sent     : " + myRequest);
+  console.log("received : " + myResult);
 });
