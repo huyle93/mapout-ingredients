@@ -1,16 +1,22 @@
 require('dotenv').load()
 //const key = require('./config.js')
 var https = require('https');
-var address = 'Boston Museum';
+var address = '21 Madbury Rd UNIT231 Durham NH';
 //This is for geocode google API call
-httpsGet(address, (myResult) => {
+httpsGetgeocode(address, function myResult(lat,long){
     //Uncomment this line to test
-    //console.log("sent     : " + address);
-    //console.log("received : " + myResult);
+
+    console.log("sent     : " + address);
+    console.log("received lat: " + lat);
+    console.log("received long: " + long);
+
 });
-function httpsGet(myData, callback) {
+
+function httpsGetgeocode(myData, callback) {
     // Update these options with the details of the web service you would like to call
     var google_key = process.env.googleAPI_KEY
+    var lat;
+    var lng;
     var options = {
         host: 'maps.googleapis.com',
         port: 443,
@@ -33,11 +39,10 @@ function httpsGet(myData, callback) {
             // We can see it in the log output via:
             // console.log(JSON.stringify(returnData))
             // we may need to parse through it to extract the needed data
-            var pop = JSON.parse(returnData);
-            var lat = Number(pop.results[0].geometry.location.lat)
-            var lng = Number(pop.results[0].geometry.location.lng)
-            callback(lat);
-            callback(lng);
+              var pop = JSON.parse(returnData);
+              var lat = Number(pop.results[0].geometry.location.lat)
+              var lng = Number(pop.results[0].geometry.location.lng)
+              callback(lat, lng);
             // this will execute whatever function the caller defined, with one argument
         });
     });
@@ -71,9 +76,4 @@ console.log(data.results[0].geometry.location.lng)
 //Uncomment the line below to test
 //var test = google()
 
-
-
-
-
-
-
+module.exports = {httpsGetgeocode};
