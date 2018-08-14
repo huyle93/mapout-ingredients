@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Mapout Ingredients
 
 # Project Description
@@ -121,4 +120,3 @@ package.json
 
  ## shine_api.js:
  uses several of different APIs from solarialabs.com's shine stats. These APIs include data that can tell you based off of the makes and models of a car if it is among those most commonly stolen in a given area, stats such as the mpg or average annual cost to operate the vehicle. Finally we can also the Shine API to give us some predictions for information such as how the car may perform in the future.
->>>>>>> debug
